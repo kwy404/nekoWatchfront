@@ -11,7 +11,6 @@ class Modal extends React.Component {
         super(props);
         this.state = {
             fakeLoading: [0,0,0,0,0,0,0,0,0,0],
-            eps: this.props.anime.episodes !== undefined ? this.props.anime.episodes : [],
             loading: false
         };
         this.voltar= this.voltar.bind(this);
@@ -85,7 +84,7 @@ class Modal extends React.Component {
                 </div>
                 <div className="ep">
                 <h1>Episódios</h1>
-                {this.state.eps.map((ep, index) => (
+                {this.props.anime.episodes.map((ep, index) => (
                 <a href={`/assistir/${ep.idEpisode}`}>
                     <div
                     className="epe">
