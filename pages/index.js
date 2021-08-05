@@ -34,7 +34,6 @@ class Home extends React.Component {
   }
   async submitForm(e){
     e.preventDefault()
-    window.scroll({top: 300, left: 0, behavior: 'smooth'});
     if(this.state.searchParam.trim().length > 0){
       const react = this
       try {
@@ -43,6 +42,7 @@ class Home extends React.Component {
         setTimeout(() => {
           react.setState({ searchResult: json })
         }, 500);
+        document.querySelector("body").scroll({top: 300, left: 0, behavior: 'smooth'});
       } catch (error) {
         console.log(`error`)
         return { error };
@@ -51,6 +51,7 @@ class Home extends React.Component {
   }
   async submitFormDigitar(){
     if(this.state.searchParam.trim().length > 0){
+      this.setState({searchParam: document.querySelector("#inputAnime").value})
       const react = this
       try {
         const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/caixeta`);
@@ -80,7 +81,6 @@ class Home extends React.Component {
   }
   searchAnime(){
     window.scroll({top: 300, left: 0, behavior: 'smooth'});
-    this.setState({searchParam: document.querySelector("#inputAnime").value})
   }
   sairModal(){
     this.setState({vendoModal: false})
@@ -124,7 +124,6 @@ class Home extends React.Component {
         autoComplete={"off"}
         id="inputAnime"
         onKeyUp={() => this.setState({searchParam: document.querySelector("#inputAnime").value})}
-        onKeyDown={() => this.searchAnime()}
         type="text" placeholder="Buscar animes..."></input>
         <button></button>
       </form>
