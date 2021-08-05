@@ -26,7 +26,8 @@ class Home extends React.Component {
       loadingAnimes: true,
       fakeLoading: [0,0,0,0,0,0,0,0,0,0],
       animesFavoritos: [],
-      carregandoModal: false
+      carregandoModal: false,
+      showSearch: 0
     };
   }
   componentDidMount(){
@@ -80,7 +81,6 @@ class Home extends React.Component {
   searchAnime(){
     window.scroll({top: 300, left: 0, behavior: 'smooth'});
     this.setState({searchParam: document.querySelector("#inputAnime").value})
-    this.submitFormDigitar()
   }
   sairModal(){
     this.setState({vendoModal: false})
@@ -110,6 +110,7 @@ class Home extends React.Component {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     </Head>
     <div>
+      <div className="background"/>
       { this.state.carregandoModal && <div className="openAnimeBa">
       <i className="fas fa-spinner"></i>
       </div> }
@@ -130,41 +131,75 @@ class Home extends React.Component {
     </div>
     <Destaque></Destaque>
     <div>
-    { this.state.searchResult != null && this.state.searchParam.trim().length > 0 &&
-      <div className='searchResult'>
+      { this.state.searchResult !== null && this.state.searchResult.animes.length &&
+      <div className="scrollAnime"
+      >
         <h1 className="title">Resultados para { this.state.searchParam }</h1>
-        <div>
-          {
-          this.state.searchResult != null &&
-          <Carousel 
-          itemsToShow={8}>
-          {this.state.searchResult.animes.map(anime => (
-            <div>
-              <a
-              onClick={() => this.getAnime(anime.idAnime, anime.idAnime)}>
+        <div className="info">
+          <div
+          className="scroller"
+          style={{
+            width: `${this.state.searchResult.animes.length * 25}em`
+          }}
+          >
+            <div
+            className="animation"
+            style={{
+              transform: `translateX(-${this.state.showSearch * 20}em)`
+            }}
+            >
+            { this.state.searchResult.animes.map((anime, i) => (
               <div 
-              className="anime" key={anime.nomeAnime}>
-                <div className="photo">
-                  <div className="transparent"></div>
-                  <img src={anime.imagemAnime}/>
+              onClick={() => this.getAnime(anime.idAnime, anime.animeLink)}
+              key={anime.idAnime}
+              className={`animeTile ${(i == this.state.showSearch ? `ativoHover`: ``)}`}>
+                <img src={anime.imagemAnime}/>  
+                <div className="hover">
+                  <p>
+                    { anime.nomeAnime }
+                  </p>
                 </div>
-                <h1>{ anime.nomeAnime }</h1>
               </div>
-            </a> 
-            </div>
             ))}
-          </Carousel>
-          }
+            </div>
+          </div>
+          <div className="icons">
+            <div 
+            onClick={() => {
+              if(this.state.searchResult.animes.length >= this.state.showSearch + 2){
+                this.setState({showSearch: this.state.showSearch += 1})
+              } else{
+                this.setState({showSearch: 0})
+              }
+            }
+            }
+            className="right">
+              <div className="blur"/>
+              <i className="fas fa-chevron-right icon"></i>
+            </div>
+            <div className="left"
+            onClick={() => {
+              if(this.state.showSearch + this.state.searchResult.animes.length > this.state.searchResult.animes.length ){
+                this.setState({showSearch: this.state.showSearch -= 1})
+              } else{
+                this.setState({showSearch: this.state.animes.length - 1})
+              }
+            }
+            }
+            >
+            <div className="blur"/>
+            <i className="fas fa-chevron-left icon"></i>
+            </div>
+          </div>
         </div>
       </div>
-      }
-      <div className="scrollAnime">
+    }
+     <div className="scrollAnime">
         <Carrousel
         home={this}
         titulo={`Animes mais vistos`}
         url={``}
-        >
-        </Carrousel>
+        />
         <Carrousel
         home={this}
         titulo={`Animes Aleatórios `}
@@ -219,11 +254,53 @@ class Home extends React.Component {
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
           sans-serif;
-        background-color: #181818;
         user-select: none;
         overflow-y: auto;
         overflow-x: hidden;
         padding-bottom: 5vh;
+        background-color: rgb(26, 29, 41);
+        position: fixed;
+        height: 100vh;
+        top: 0px;
+        transition: opacity 200ms ease 0s;
+        width: 100%;
+        z-index: -3;
+      }
+
+      ::-webkit-scrollbar {
+        background: transparent;
+        height: 8px;
+        width: 8px;
+      }
+    
+      ::-webkit-scrollbar-thumb {
+          border: none;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+          background: #734ea8;
+          -webkit-border-radius: 8px;
+          border-radius: 8px;
+          min-height: 40px;
+      }
+      
+      .background{
+        background-color: rgb(26, 29, 41);
+        position: fixed;
+        height: 100vh;
+        right: 8px;
+        top: 0px;
+        transition: opacity 200ms ease 0s;
+        width: 100%;
+        z-index: -3;
+      }
+
+      .background::after{
+        background: url('./images/background.png') center center / cover no-repeat fixed;
+        content: "";
+        position: absolute;
+        inset: 0px;
+        opacity: 1;
+        transition: opacity 500ms ease 0s;
       }
 
       .searchResult{
@@ -330,79 +407,25 @@ class Home extends React.Component {
         background: white;
         color: #181818;
       }
-      
-      .title{
-        color: #fff;
-        position: relative;
-        left: 157px;
-      }
-
-      .scrollAnime{
-        margin-left: -40px;
-        top: -5vh;
-        left: 10px;
-        position: relative;
-        transform: scale(0.98);
-      }
-      
-      .anime{
-        width: 210px;
-        height: 250px;
-        display: inline-block;
-        cursor: pointer;
-      }
-
-      .anime .photo{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0px;
-      }
-
-      .anime img{
-        width: calc(100% - 4px);
-        height: 100%;
-        object-fit: cover;
-        margin-left: 3px;
-        box-shadow: -3px 4px 7px 2px #00000096;
-      }
-
-      .anime img:hover{
-        border: 2px solid #fff;
-      }
-
-      .anime h1{
-        position: absolute;
-        bottom: 0;
-        color: #fff;
-        left: 10px;
-        font-size: 1.2vw;
-        text-shadow: 1px 2px rgba(0,0,0,.90);
-        max-width: 80%;
-        overflow: hidden;
-      }
-
-      .rec-carousel-item{
-        width: 200px;
-        left: 2vw;
-        position: relative;
-        margin-left: 5px;
-        border: 2px solid transparent;
-      }
-
-      .rec-arrow-left{
-        margin-left: 50px;
-      }
 
       .fixedTop{
         position: fixed;
         right: 60px;
-        z-index: 100;
+        z-index: 1000;
         top: 40px;
       }
 
       .fixedTop button{
         display: none;
+      }
+
+      form{
+        background-color: rgb(17 19 28);
+        width: 100%;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        padding: 10px;
       }
 
       .fixedTop input{
@@ -412,6 +435,9 @@ class Home extends React.Component {
         border-radius: 4px;
         background: rgba(0,0,0,.80);
         font-size: 20px;
+        float: right;
+        right: 30px;
+        position: relative;
         outline: none;
       }
 
@@ -445,6 +471,131 @@ class Home extends React.Component {
         font-size: 500%;
         animation: 1s loding infinite;
         color: white;
+      }
+
+      
+      .title{
+        font-size: 1.8rem;
+        color: white;
+        margin-left: 2.2em;
+        top: 1em;
+        position: relative;
+      }
+
+      .animeTile{
+        width: 20em;
+        height: 180px;
+        margin-left: 1.8em;
+        display: inline-block;
+        box-shadow: -1px 5px 11px 3px rgb(0 0 0 / 40%);
+        transition: 0.4s;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        border-radius: 4px;
+      }
+
+      .ativoHover{
+        box-shadow: -1px 5px 11px 3px rgb(0 0 0 / 80%);
+        border: 3px solid white;
+        transform: scale(1.1);
+      }
+
+      .ativoHover .hover{
+        opacity: 1 !important;
+      }
+
+      .animeTile img{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .animeTile .hover{
+        background: rgba(0,0,0,.60);
+        position: absolute;
+        top: 0px;
+        height: 180px;
+        width: 20em;
+        opacity: 0;
+        z-index: 2;
+        transition: 0.4s;
+      }
+
+      .animeTile .hover:hover{
+        opacity: 1;
+      }
+      
+      .animeTile .hover p{
+        color: white;
+        text-overflow: ellipsis;
+        width: 90%;
+        left: 10px;
+        font-size: 1.2em;
+        top: 0px;
+        position: relative;
+      }
+
+      .scroller{
+        height: auto;
+        padding: 30px;
+      }
+
+      .animation{
+        transition: 0.4s;
+      }
+
+      .info{
+        display: inline-block;
+      }
+
+      .info .right{
+        position: absolute;
+        right: 0px;
+        width: 64px;
+        height: 180px;
+        margin-top: -214px;
+        cursor: pointer;
+      }
+
+      .info .right .blur{
+        filter: blur(11px) saturate(0.5);
+        transform: scale(1.1);
+        width: 64px;
+        height: 180px;
+        background: #0000007a;
+      }
+
+      .info .left{
+        position: absolute;
+        left: 0px;
+        width: 64px;
+        height: 180px;
+        margin-top: -214px;
+        cursor: pointer;
+      }
+
+      .info .icons:hover{
+        opacity: 1;
+      }
+
+      .info .icon{
+        color: white;
+        font-size: 2em;
+        z-index: 4;
+        position: relative;
+        top: -61%;
+        left: 25px;
+      }
+
+      .info .left .blur{
+        filter: blur(11px) saturate(0.5);
+        transform: scale(1.1);
+        width: 64px;
+        height: 180px;
+        background: #0000007a;
       }
 
       @keyframes loding{

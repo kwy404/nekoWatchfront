@@ -13,7 +13,7 @@ export default class Home extends React.Component {
       render() {
         return <div className="destaqueBoo">
                 <div className="next">
-                    <img className="logo" src="./logo.png"></img>
+                    {/* <img className="logo" src="./logo.png"></img> */}
                 </div>
                 <img src="./heroBack.jpg"></img>
                 <style jsx global>{`
@@ -31,7 +31,7 @@ export default class Home extends React.Component {
                         height: 100%;
                         top: 0px;
                         left: 0px;
-                        background: #402968a3;
+                        background: rgba(0,0,0,.50);
                     }
 
                     .destaqueBoo img{
