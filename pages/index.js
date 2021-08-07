@@ -20,6 +20,7 @@ class Home extends React.Component {
       atualSlide: 0,
       animeDestaque: null,
       searchParam: "",
+      searchParamEnter: "",
       searchResult: null,
       vendoAnime: null,
       vendoModal: false,
@@ -35,6 +36,7 @@ class Home extends React.Component {
   async submitForm(e){
     e.preventDefault()
     if(this.state.searchParam.trim().length > 0){
+      this.setState({ searchParamEnter: document.querySelector("#inputAnime").value })
       const react = this
       try {
         const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/-_-`);
@@ -52,6 +54,7 @@ class Home extends React.Component {
   async submitFormDigitar(){
     if(this.state.searchParam.trim().length > 0){
       this.setState({searchParam: document.querySelector("#inputAnime").value})
+      this.setState({ searchParamEnter: document.querySelector("#inputAnime").value })
       const react = this
       try {
         const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/-_-`);
@@ -80,7 +83,7 @@ class Home extends React.Component {
     }
   }
   searchAnime(){
-    window.scroll({top: 300, left: 0, behavior: 'smooth'});
+    window.scroll({top: 0, left: 0, behavior: 'smooth'});
   }
   sairModal(){
     this.setState({vendoModal: false})
@@ -130,10 +133,12 @@ class Home extends React.Component {
     </div>
     <br/><br/><br/>
     <div>
-      { this.state.searchResult !== null && this.state.searchResult.animes.length &&
+      { this.state.searchResult !== null && this.state.searchResult.animes.length
+      && this.state.searchParam.trim().length > 0 && this.state.searchParamEnter.toLowerCase() == this.state.searchParam.toLowerCase()
+      &&
       <div className="scrollAnime"
       >
-        <h1 className="title">Resultados para { this.state.searchParam }</h1>
+        <h1 className="title">Resultados para { this.state.searchParamEnter }</h1>
         <div className="info">
           <div
           className="scroller"
