@@ -42,7 +42,7 @@ class Home extends React.Component {
         setTimeout(() => {
           react.setState({ searchResult: json })
         }, 500);
-        document.querySelector("body").scroll({top: 300, left: 0, behavior: 'smooth'});
+        document.querySelector("body").scroll({top: 0, left: 0, behavior: 'smooth'});
       } catch (error) {
         console.log(`error`)
         return { error };
