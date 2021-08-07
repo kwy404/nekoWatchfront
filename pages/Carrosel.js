@@ -15,7 +15,8 @@ class Carrousel extends React.Component {
       fakeLoading: [0,0,0,0,0,0,0,0,0,0],
       width: 1920,
       toShow: 8,
-      show: 0
+      show: 0,
+      mobile: false
     };
     this.getAnime= this.getAnime.bind(this);
     this.changeView= this.changeView.bind(this);
@@ -35,20 +36,28 @@ class Carrousel extends React.Component {
       this.setState({toShow: 8})
     } else if(this.state.width >= 1720 && this.state.width <= 1920){
       this.setState({toShow: 8})
+      this.setState({mobile: false})
     } else if(this.state.width >= 1496 && this.state.width <= 1720){
       this.setState({toShow: 7})
+      this.setState({mobile: false})
     } else if(this.state.width >= 1496 && this.state.width <= 1720){
       this.setState({toShow: 6})
+      this.setState({mobile: false})
     } else if(this.state.width >= 1362 && this.state.width <= 1496){
       this.setState({toShow: 6})
+      this.setState({mobile: false})
     } else if(this.state.width >= 979 && this.state.width <= 1362){
       this.setState({toShow: 5})
+      this.setState({mobile: false})
     } else if(this.state.width >= 803 && this.state.width <= 979){
       this.setState({toShow: 4})
+      this.setState({mobile: false})
     } else if(this.state.width >= 803 && this.state.width <= 803){
       this.setState({toShow: 3})
+      this.setState({mobile: false})
     } else{
       this.setState({toShow: 2})
+      this.setState({mobile: true})
     }
   }
   async getAnimes() {
@@ -94,7 +103,7 @@ class Carrousel extends React.Component {
       anime={this.state.vendoAnime}></Modal>
     </div>
     }
-    { this.state.animes != null && this.state.animes.length &&
+    { this.state.animes != null && this.state.animes.length > 0 &&
     <div className="scrollAnime"
     >
       <h1 className="title">{ this.props.titulo }</h1>
@@ -102,13 +111,13 @@ class Carrousel extends React.Component {
         <div
         className="scroller"
         style={{
-          width: `${this.state.animes.length * 25}em`
+          width: `${this.state.animes.length * 300}px`
         }}
         >
           <div
           className="animation"
           style={{
-            transform: `translateX(-${this.state.show * 20}em)`
+            transform: `translateX(-${(this.state.show * 263)}px)`
           }}
           >
           { this.state.animes.map((anime, i) => (
@@ -210,8 +219,8 @@ class Carrousel extends React.Component {
       }
 
       .animeTile{
-        width: 20em;
-        height: 180px;
+        width: 240px;
+        height: 140px;
         margin-left: 1.8em;
         display: inline-block;
         box-shadow: -1px 5px 11px 3px rgb(0 0 0 / 40%);
@@ -245,7 +254,7 @@ class Carrousel extends React.Component {
         position: absolute;
         top: 0px;
         height: 180px;
-        width: 20em;
+        width: 245px;
         opacity: 0;
         z-index: 2;
         transition: 0.4s;
@@ -260,7 +269,7 @@ class Carrousel extends React.Component {
         text-overflow: ellipsis;
         width: 90%;
         left: 10px;
-        font-size: 1.2em;
+        font-size: 0.92em;
         top: 0px;
         position: relative;
       }
@@ -282,8 +291,8 @@ class Carrousel extends React.Component {
         position: absolute;
         right: 0px;
         width: 64px;
-        height: 180px;
-        margin-top: -214px;
+        height: 154px;
+        margin-top: -190px;
         cursor: pointer;
       }
 
@@ -299,8 +308,8 @@ class Carrousel extends React.Component {
         position: absolute;
         left: 0px;
         width: 64px;
-        height: 180px;
-        margin-top: -214px;
+        height: 154px;
+        margin-top: -190px;
         cursor: pointer;
       }
 
@@ -313,7 +322,7 @@ class Carrousel extends React.Component {
         font-size: 2em;
         z-index: 4;
         position: relative;
-        top: -61%;
+        top: -74%;
         left: 25px;
       }
 

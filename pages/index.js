@@ -37,7 +37,7 @@ class Home extends React.Component {
     if(this.state.searchParam.trim().length > 0){
       const react = this
       try {
-        const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/caixeta`);
+        const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/-_-`);
         const json = res.data
         setTimeout(() => {
           react.setState({ searchResult: json })
@@ -54,7 +54,7 @@ class Home extends React.Component {
       this.setState({searchParam: document.querySelector("#inputAnime").value})
       const react = this
       try {
-        const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/caixeta`);
+        const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/-_-`);
         const json = res.data
         react.setState({ searchResult: json })
       } catch (error) {
@@ -128,7 +128,7 @@ class Home extends React.Component {
         <button></button>
       </form>
     </div>
-    <Destaque></Destaque>
+    <br/><br/><br/>
     <div>
       { this.state.searchResult !== null && this.state.searchResult.animes.length &&
       <div className="scrollAnime"
@@ -138,13 +138,13 @@ class Home extends React.Component {
           <div
           className="scroller"
           style={{
-            width: `${this.state.searchResult.animes.length * 25}em`
+            width: `${this.state.searchResult.animes.length * 300}px`
           }}
           >
             <div
             className="animation"
             style={{
-              transform: `translateX(-${this.state.showSearch * 20}em)`
+              transform: `translateX(-${this.state.showSearch * 263}px)`
             }}
             >
             { this.state.searchResult.animes.map((anime, i) => (
@@ -202,46 +202,54 @@ class Home extends React.Component {
         <Carrousel
         home={this}
         titulo={`Animes Aleatórios `}
-        url={`${Math.floor(Math.random() * 144)}/A/caixeta`}
+        url={`${Math.floor(Math.random() * 144)}/A/-_-`}
         >
         </Carrousel>
         <Carrousel
         home={this}
         titulo={`Tudo sobre Naruto`}
-        url={`1/naruto/caixeta`}
+        url={`1/naruto/-_-`}
         >
         </Carrousel>
         <Carrousel
         home={this}
         titulo={`Tudo sobre Dragon Ball`}
-        url={`1/dragon ball/caixeta`}
+        url={`1/dragon ball/-_-`}
         >
         </Carrousel>
         <Carrousel
         home={this}
         titulo={`Aventura`}
-        url={`1/aventura/caixeta`}
+        url={`1/aventura/-_-`}
         >
         </Carrousel>
         <Carrousel
         home={this}
         titulo={`Terror`}
-        url={`1/terror/caixeta`}
-        >
-        </Carrousel>
-        <Carrousel
-        home={this}
-        titulo={`Hentai`}
-        url={`1/hentai/caixeta`}
+        url={`1/terror/-_-`}
         >
         </Carrousel>
         <Carrousel
         home={this}
         titulo={`Luta`}
-        url={`1/luta/caixeta`}
+        url={`1/luta/-_-`}
         >
         </Carrousel>
       </div>
+      <br/><br/><br/><br/><br/><br/><br/><br/>
+      <h1 style={{
+        color: "white",
+        fontSize: "18px",
+        padding: "2em",
+        marginLeft: `30px`,
+        maxWidth: `80%`
+       }}>
+        Todos os textos, imagens, gráficos, animações, vídeos, músicas, sons e outros materiais são protegidos por direitos autorais e outros direitos de propriedade intelectual pertencentes à <a 
+        style={{ color: `#734ea8` }}
+        href="https://www.anitube.site/"
+        target="_blank"
+        >Anitube</a>, suas subsidiárias, afiliadas e licenciantes.
+      </h1>
     </div>
     
 
@@ -482,8 +490,8 @@ class Home extends React.Component {
       }
 
       .animeTile{
-        width: 20em;
-        height: 180px;
+        width: 240px;
+        height: 140px;
         margin-left: 1.8em;
         display: inline-block;
         box-shadow: -1px 5px 11px 3px rgb(0 0 0 / 40%);
@@ -517,7 +525,7 @@ class Home extends React.Component {
         position: absolute;
         top: 0px;
         height: 180px;
-        width: 20em;
+        width: 245px;
         opacity: 0;
         z-index: 2;
         transition: 0.4s;
@@ -532,7 +540,7 @@ class Home extends React.Component {
         text-overflow: ellipsis;
         width: 90%;
         left: 10px;
-        font-size: 1.2em;
+        font-size: 0.92em;
         top: 0px;
         position: relative;
       }
@@ -554,8 +562,8 @@ class Home extends React.Component {
         position: absolute;
         right: 0px;
         width: 64px;
-        height: 180px;
-        margin-top: -214px;
+        height: 154px;
+        margin-top: -190px;
         cursor: pointer;
       }
 
@@ -571,8 +579,8 @@ class Home extends React.Component {
         position: absolute;
         left: 0px;
         width: 64px;
-        height: 180px;
-        margin-top: -214px;
+        height: 154px;
+        margin-top: -190px;
         cursor: pointer;
       }
 
@@ -585,7 +593,7 @@ class Home extends React.Component {
         font-size: 2em;
         z-index: 4;
         position: relative;
-        top: -61%;
+        top: -74%;
         left: 25px;
       }
 

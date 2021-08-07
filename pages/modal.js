@@ -45,12 +45,12 @@ class Modal extends React.Component {
         className="openAnime">
         { this.props.anime == undefined &&
             <div className="load">
-                <div className="imgCover fakeLoading">
-                <a onClick={() => this.voltar()} className="voltar">
-                    <i className="fas fa-arrow-left"></i>
-                </a>
-                </div>
+                
+                
                 <div className="ep">
+                <div className="imgCover fakeLoading">
+                
+                </div>
                 <h1>Episódios</h1>
                 {this.state.fakeLoading.map((ep, index) => (
                 <a href={`/assistir/${ep.episodeId}`}>
@@ -72,10 +72,10 @@ class Modal extends React.Component {
             }
             { this.props.anime != undefined &&
             <div className="load">
-                <div className="imgCover">
                 <a onClick={() => this.voltar()} className="voltar">
                     <i className="fas fa-arrow-left"></i>
                 </a>
+                <div className="imgCover">
                 {/* <i 
                 onClick={() => this.addFavorite(this.props.anime)}
                 className={`fas fa-heart love
@@ -294,6 +294,12 @@ class Modal extends React.Component {
 
       .loved{
         color: #cc1e1e;
+      }
+
+      @media screen and (max-width: 768px){
+        .openAnime{
+          width: 100%;
+        }
       }
 
       @keyframes loding{
