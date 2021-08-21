@@ -16,7 +16,8 @@ class Carrousel extends React.Component {
       width: 1920,
       toShow: 8,
       show: 0,
-      mobile: false
+      mobile: false,
+      mouseUp: 0
     };
     this.getAnime= this.getAnime.bind(this);
     this.changeView= this.changeView.bind(this);
@@ -121,9 +122,24 @@ class Carrousel extends React.Component {
           }}
           >
           { this.state.animes.map((anime, i) => (
-            <div 
+            <div
+            
             onClick={() => this.getAnime(anime.idAnime, anime.animeLink)}
             key={anime.idAnime}
+            onTouchEnd={(e) => {
+              const left = ( e.changedTouches[0].clientX - window.innerWidth) > 0
+              if(left){
+                if((i + 1) < this.state.animes.length){
+                  this.setState({show: i + 1})
+                }
+              } else{
+                if((i - 1) > 0){
+                  this.setState({show: i - 1})
+                } else{
+                  this.setState({show: this.state.animes.length - 1})
+                }
+              }
+            }}
             className={`animeTile ${(i == this.state.show ? `ativoHover`: ``)}`}>
               <img src={anime.imagemAnime}/>  
               <div className="hover">
@@ -212,7 +228,7 @@ class Carrousel extends React.Component {
 
       .title{
         font-size: 1.8rem;
-        color: white;
+        color: #ffffffc9;
         margin-left: 2.2em;
         top: 1em;
         position: relative;

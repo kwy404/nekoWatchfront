@@ -156,6 +156,20 @@ class Home extends React.Component {
               <div 
               onClick={() => this.getAnime(anime.idAnime, anime.animeLink)}
               key={anime.idAnime}
+              onTouchEnd={(e) => {
+                const left = ( e.changedTouches[0].clientX - window.innerWidth) > 0
+                if(left){
+                  if((i + 1) < this.state.animes.length){
+                    this.setState({showSearch: i + 1})
+                  }
+                } else{
+                  if((i - 1) > 0){
+                    this.setState({showSearch: i - 1})
+                  } else{
+                    this.setState({showSearch: this.state.animes.length - 1})
+                  }
+                }
+              }}
               className={`animeTile ${(i == this.state.showSearch ? `ativoHover`: ``)}`}>
                 <img src={anime.imagemAnime}/>  
                 <div className="hover">
