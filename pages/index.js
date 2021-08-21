@@ -201,6 +201,11 @@ class Home extends React.Component {
      <div className="scrollAnime">
         <Carrousel
         home={this}
+        titulo={`Lançamentos do Dia`}
+        url={`launchDay`}
+        />
+        <Carrousel
+        home={this}
         titulo={`Animes mais vistos`}
         url={``}
         />
@@ -267,8 +272,6 @@ class Home extends React.Component {
           Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
           sans-serif;
         user-select: none;
-        overflow-y: auto;
-        overflow-x: hidden;
         padding-bottom: 5vh;
         background-color: rgb(26, 29, 41);
         position: fixed;
