@@ -159,7 +159,7 @@ class Home extends React.Component {
               onTouchEnd={(e) => {
                 const left = ( (e.changedTouches[0].clientX + 200) - window.innerWidth) > 0
                 if(!left){
-                  if((i + 1) < this.state.animes.length){
+                  if((i + 1) < this.state.searchResult.animes.length){
                     this.setState({showSearch: i + 1})
                   } else{
                     this.setState({showSearch: 0})
@@ -168,7 +168,7 @@ class Home extends React.Component {
                   if((i) > 0){
                     this.setState({showSearch: i - 1})
                   } else{
-                    this.setState({showSearch: this.state.animes.length - 1})
+                    this.setState({showSearch: this.state.searchResult.animes.length - 1})
                   }
                 }
               }}
