@@ -161,9 +161,11 @@ class Home extends React.Component {
                 if(!left){
                   if((i + 1) < this.state.animes.length){
                     this.setState({showSearch: i + 1})
+                  } else{
+                    this.setState({showSearch: 0})
                   }
                 } else{
-                  if((i - 1) > 0){
+                  if((i) > 0){
                     this.setState({showSearch: i - 1})
                   } else{
                     this.setState({showSearch: this.state.animes.length - 1})

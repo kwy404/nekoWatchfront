@@ -131,9 +131,11 @@ class Carrousel extends React.Component {
               if(!left){
                 if((i + 1) < this.state.animes.length){
                   this.setState({show: i + 1})
+                } else{
+                  this.setState({show: 0})
                 }
               } else{
-                if((i - 1) > 0){
+                if((i) > 0){
                   this.setState({show: i - 1})
                 } else{
                   this.setState({show: this.state.animes.length - 1})
