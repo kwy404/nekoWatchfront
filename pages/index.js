@@ -290,7 +290,7 @@ class Home extends React.Component {
         user-select: none;
         padding-bottom: 5vh;
         background-color: rgb(26, 29, 41);
-        position: fixed;
+        position: relative;
         height: 100vh;
         top: 0px;
         transition: opacity 200ms ease 0s;
