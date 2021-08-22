@@ -128,7 +128,7 @@ class Carrousel extends React.Component {
             key={anime.idAnime}
             onTouchEnd={(e) => {
               const left = ( (e.changedTouches[0].clientX + 200) - window.innerWidth) > 0
-              if(left){
+              if(!left){
                 if((i + 1) < this.state.animes.length){
                   this.setState({show: i + 1})
                 }

@@ -157,8 +157,8 @@ class Home extends React.Component {
               onClick={() => this.getAnime(anime.idAnime, anime.animeLink)}
               key={anime.idAnime}
               onTouchEnd={(e) => {
-                const left = ( e.changedTouches[0].clientX - window.innerWidth) > 0
-                if(left){
+                const left = ( (e.changedTouches[0].clientX + 200) - window.innerWidth) > 0
+                if(!left){
                   if((i + 1) < this.state.animes.length){
                     this.setState({showSearch: i + 1})
                   }
