@@ -4,6 +4,7 @@ import axios from 'axios';
 import Carousel from 'react-elastic-carousel';
 import Modal from './modal';
 
+
 class Carrousel extends React.Component {
   constructor(props) {
     super(props);
@@ -27,9 +28,44 @@ class Carrousel extends React.Component {
     this.getAnimes()
     this.setState({width: window.innerWidth})
     this.changeView()
-    window.addEventListener('resize', () => {
-      this.setState({width: window.innerWidth})
-      this.changeView()
+    const aKeyT = new Audio('./audio/airstream_move.mp3');
+    const enter = new Audio('./audio/cross-enter.mp3');
+    window.addEventListener('keyup', (e) => {
+      // console.log(e.key)
+      if(e.key == 'ArrowLeft'){
+        if(this.props.in === this.props.carrouselIndex){
+          if(this.state.show + this.state.animes.length > this.state.animes.length ){
+            aKeyT.play()
+            setTimeout(() => {
+              this.setState({show: this.state.show -= 1})
+            }, 100);
+          } else{
+            aKeyT.play()
+            setTimeout(() => {
+             this.setState({show: this.state.animes.length - 1})
+            }, 100);
+          }
+        }
+      }
+      if(e.key == `Enter`){
+        enter.play()
+        this.getAnime(this.state.animes[this.state.show].idAnime, this.state.animes[this.state.show].animeLink)
+      }
+      if(e.key == 'ArrowRight'){
+        if(this.props.in === this.props.carrouselIndex){
+          if(this.state.animes.length >= this.state.show + 2){
+            aKeyT.play()
+            setTimeout(() => {
+              this.setState({show: this.state.show += 1})
+            }, 100);
+          } else{
+            aKeyT.play()
+            setTimeout(() => {
+              this.setState({show: 0})
+            }, 100);
+          }
+        }
+      }
     })
   }
   changeView(){
@@ -141,7 +177,9 @@ class Carrousel extends React.Component {
                 }
               }
             }}
-            className={`animeTile ${(i == this.state.show ? `ativoHover`: ``)}`}>
+            className={`animeTile ${(this.props.in == this.props.carrouselIndex &&
+            this.state.show == i
+            ? `ativoHover`: ``)}`}>
               <img src={anime.imagemAnime}/>  
               <div className="hover">
                 <p>
@@ -152,7 +190,7 @@ class Carrousel extends React.Component {
           ))}
           </div>
         </div>
-        <div className="icons">
+        {/* <div className="icons">
           <div 
           onClick={() => {
             if(this.state.animes.length >= this.state.show + 2){
@@ -179,7 +217,7 @@ class Carrousel extends React.Component {
           <div className="blur"/>
           <i className="fas fa-chevron-left icon"></i>
           </div>
-        </div>
+        </div> */}
       </div>
 
     </div>

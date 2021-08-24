@@ -28,7 +28,44 @@ class Home extends React.Component {
       fakeLoading: [0,0,0,0,0,0,0,0,0,0],
       animesFavoritos: [],
       carregandoModal: false,
-      showSearch: 0
+      showSearch: 0,
+      carrouselA: [
+        {
+            titulo: "Lançamentos do Dia",
+            url: "launchDay",
+            scroll: 0
+        },
+        {
+            titulo: "Animes mais vistos",
+            url: "",
+            scroll: 0
+        },
+        {
+            titulo: "Animes Aleatórios",
+            url: `${Math.floor(Math.random() * 144)}/A/-_-`,
+            scroll: 0
+        },
+        {
+            titulo: "Tudo sobre Naruto",
+            url: `1/naruto/-_-`,
+            scroll: 0
+        },
+        {
+            titulo: "Tudo sobre Dragon Ball",
+            url: `1/dragon ball/-_-`,
+            scroll: 0
+        },
+        {
+            titulo: "Aventura",
+            url: `1/aventura/-_-`,
+            scroll: 0
+        },
+        {
+            titulo: "Aventura",
+            url: `1/aventura/-_-`,
+            scroll: 0
+        }
+        ]
     };
   }
   componentDidMount(){
@@ -215,52 +252,13 @@ class Home extends React.Component {
       </div>
     }
      <div className="scrollAnime">
+       { this.state.carrouselA.map((item, i) => (
         <Carrousel
         home={this}
-        titulo={`Lançamentos do Dia`}
-        url={`launchDay`}
+        titulo={item.title}
+        url={item.url}
         />
-        <Carrousel
-        home={this}
-        titulo={`Animes mais vistos`}
-        url={``}
-        />
-        <Carrousel
-        home={this}
-        titulo={`Animes Aleatórios `}
-        url={`${Math.floor(Math.random() * 144)}/A/-_-`}
-        >
-        </Carrousel>
-        <Carrousel
-        home={this}
-        titulo={`Tudo sobre Naruto`}
-        url={`1/naruto/-_-`}
-        >
-        </Carrousel>
-        <Carrousel
-        home={this}
-        titulo={`Tudo sobre Dragon Ball`}
-        url={`1/dragon ball/-_-`}
-        >
-        </Carrousel>
-        <Carrousel
-        home={this}
-        titulo={`Aventura`}
-        url={`1/aventura/-_-`}
-        >
-        </Carrousel>
-        <Carrousel
-        home={this}
-        titulo={`Terror`}
-        url={`1/terror/-_-`}
-        >
-        </Carrousel>
-        <Carrousel
-        home={this}
-        titulo={`Luta`}
-        url={`1/luta/-_-`}
-        >
-        </Carrousel>
+       ))}
       </div>
       <br/><br/><br/><br/><br/><br/><br/><br/>
       <h1 style={{
