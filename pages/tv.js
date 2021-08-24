@@ -60,11 +60,6 @@ class Home extends React.Component {
             titulo: "Aventura",
             url: `1/aventura/-_-`,
             scroll: 0
-        },
-        {
-            titulo: "Aventura",
-            url: `1/aventura/-_-`,
-            scroll: 0
         }
         ]
     };
@@ -279,7 +274,7 @@ class Home extends React.Component {
        { this.state.carrouselA.map((item, i) => (
         <Carrousel
         home={this}
-        titulo={item.title}
+        titulo={item.titulo}
         url={item.url}
         in={i}
         tv={true}
