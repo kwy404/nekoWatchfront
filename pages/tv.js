@@ -92,7 +92,7 @@ class Home extends React.Component {
       this.setState({ searchParamEnter: document.querySelector("#inputAnime").value })
       const react = this
       try {
-        const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/-_-`);
+        const res = await axios.get(`http://167.114.82.198:3333/1/${react.state.searchParam}/-_-`);
         const json = res.data
         setTimeout(() => {
           react.setState({ searchResult: json })
@@ -110,7 +110,7 @@ class Home extends React.Component {
       this.setState({ searchParamEnter: document.querySelector("#inputAnime").value })
       const react = this
       try {
-        const res = await axios.get(`https://nekowatchapi1.herokuapp.com/1/${react.state.searchParam}/-_-`);
+        const res = await axios.get(`http://167.114.82.198:3333/1/${react.state.searchParam}/-_-`);
         const json = res.data
         react.setState({ searchResult: json })
       } catch (error) {
@@ -125,7 +125,7 @@ class Home extends React.Component {
     this.setState({carregandoModal: true})
     document.querySelector('html').style.overflowY = "hidden"
     try {
-      const res = await axios.get(`https://nekowatchapi1.herokuapp.com/anime/${animeID}`);
+      const res = await axios.get(`http://167.114.82.198:3333/anime/${animeID}`);
       const json = res.data
       this.setState({vendoAnime: json})
       this.setState({carregandoModal: false})
