@@ -18,7 +18,7 @@ class Video extends React.Component {
     const epVideo = document.location.pathname.split('/')[2] 
     const react = this
     try {
-      const res = await axios.get(`https://nekowatchapi1.herokuapp.com/video/${epVideo}`);
+      const res = await axios.get(`http://167.114.82.198:3333/video/${epVideo}`);
       const json = res.data
       react.setState({anime: json})
     } catch (error) {
