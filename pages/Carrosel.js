@@ -64,7 +64,7 @@ class Carrousel extends React.Component {
   async getAnimes() {
     const react = this
     try {
-      const res = await axios.get(`https://nekowatchapi1.herokuapp.com/${react.props.url}`);
+      const res = await axios.get(`http://167.114.82.198:3333/${react.props.url}`);
       const json = res.data
       if(react.props.type != undefined && react.props.type == 'search'){
         react.setState({animes: json})
@@ -84,7 +84,7 @@ class Carrousel extends React.Component {
     document.querySelector('html').style.overflowY = "hidden"
     const react = this
     try {
-      const res = await axios.get(`https://nekowatchapi1.herokuapp.com/anime/${animeID}`);
+      const res = await axios.get(`http://167.114.82.198:3333/anime/${animeID}`);
       const json = res.data
       react.props.home.setState({vendoAnime: json})
       react.props.home.setState({carregandoModal: false})
