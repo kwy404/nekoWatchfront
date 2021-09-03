@@ -64,7 +64,7 @@ class Carrousel extends React.Component {
   async getAnimes() {
     const react = this
     try {
-      const res = await axios.get(`https://nekowatchapi1.herokuapp.com/{react.props.url}`);
+      const res = await axios.get(`https://nekowatchapi1.herokuapp.com/${react.props.url}`);
       const json = res.data
       if(react.props.type != undefined && react.props.type == 'search'){
         react.setState({animes: json})
